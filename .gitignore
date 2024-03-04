@@ -10,12 +10,17 @@
 
 # Test binary, built with `go test -c`
 *.test
+test/*
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+output/*
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
+vendor/
 
 # Go workspace file
 go.work
+
+# IDE
+.idea/
