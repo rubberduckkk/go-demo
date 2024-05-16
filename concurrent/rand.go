@@ -1,13 +1,13 @@
 package main
 
 import (
-	//"io"
 	"fmt"
 	"math/rand"
 	"runtime"
 	"time"
 )
 
+// 注意 defaultRand 不是并发安全的，并发使用需要加锁，参考 rand.globalRand() 实现
 var defaultRand = rand.New(rand.NewSource(time.Now().UnixNano()))
 
 func test(index int) {
