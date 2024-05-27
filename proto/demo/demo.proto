@@ -1,0 +1,16 @@
+syntax = "proto3";
+option go_package="github.com/rubberduckkk/go-demo/proto/demo";
+
+message Ping {
+  sint64 seq = 1;
+  sint64 timestamp = 2;
+}
+
+message Pong {
+  sint64 ack = 1;
+  sint64 timestamp = 2;
+}
+
+service Demo {
+  rpc ClientStream(stream Ping) returns (Pong);
+}
