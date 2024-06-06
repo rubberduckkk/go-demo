@@ -35,3 +35,11 @@ func BenchmarkCRC32(b *testing.B) {
 		_ = CRC32(sequence)
 	}
 }
+
+func BenchmarkCRC64(b *testing.B) {
+	sequence := randSeq(1024 * 1024)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		_ = CRC64(sequence)
+	}
+}
