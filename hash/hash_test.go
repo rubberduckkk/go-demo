@@ -1,6 +1,7 @@
 package hash
 
 import (
+	"fmt"
 	"math/rand"
 	"testing"
 	"time"
@@ -18,6 +19,14 @@ func randSeq(n int) []byte {
 		b[i] = letters[rand.Intn(len(letters))]
 	}
 	return b
+}
+
+func TestCRC32(t *testing.T) {
+	sequence1 := randSeq(1024)
+	res1 := CRC32(sequence1)
+	sequence2 := randSeq(1024)
+	res2 := CRC32(sequence2)
+	fmt.Printf("res1: %x, res2: %x\n", res1, res2)
 }
 
 func BenchmarkMD5(b *testing.B) {
