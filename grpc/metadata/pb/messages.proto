@@ -1,0 +1,28 @@
+syntax = "proto3";
+package pb;
+option go_package = "github.com/rubberduckkk/go-demo/pb";
+import "google/protobuf/empty.proto";
+
+message RequestHead {
+  bool isInternal = 1; // 是否内部请求
+  uint32 serverType = 2; // 请求的服务类型，用来区分不同的服务
+  string route = 3; // 请求的路由：组件名.方法名
+  string requestId = 4; // requestId表示请求的唯一id，同一个请求重试时id应该相同
+  string traceId = 5; // 每次请求的唯一标识，主要用于链路追踪
+  bytes session = 6; // session数据，如：uid、rid、platform
+  bytes extra = 7; // 额外数据
+}
+
+message RequestComposite {
+  RequestHead head = 1;
+  bytes body = 2;
+}
+
+message Request {
+  bytes body = 1;
+}
+
+service DemoService {
+  rpc DoRequestComposite(RequestComposite) returns (google.protobuf.Empty);
+  rpc DoRequest(Request) returns (google.protobuf.Empty);
+}
