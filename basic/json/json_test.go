@@ -2,6 +2,7 @@ package json
 
 import (
 	"encoding/json"
+	"fmt"
 	"math/rand"
 	"strconv"
 	"testing"
@@ -20,6 +21,12 @@ func randSeq(n int) []byte {
 		b[i] = letters[rand.Intn(len(letters))]
 	}
 	return b
+}
+
+func TestTemp(t *testing.T) {
+	str := []string{"1", "2", "3", "4", "5", "6", "7", "8", "9"}
+	raw, err := json.Marshal(str)
+	fmt.Printf("raw: %v, err: %v\n", string(raw), err)
 }
 
 func genTestSlice(sliceLen int, itemLen int) []string {
