@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"runtime"
+	"testing"
 	"time"
 )
 
@@ -17,7 +18,7 @@ func test(index int) {
 	fmt.Println("done", index)
 }
 
-func main() {
+func TestRand(t *testing.T) {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	for i := 0; i < 10; i++ {
 		go test(i)
