@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func main() {
+func _main() {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	var mutex sync.RWMutex
 
