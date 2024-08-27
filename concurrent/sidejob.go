@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func Sideways(work func() interface{}) (done <-chan interface{}) {
+func SideJob(work func() interface{}) (done <-chan interface{}) {
 	workDone := make(chan interface{})
 	go func() {
 		defer func() {
@@ -20,7 +20,7 @@ func Sideways(work func() interface{}) (done <-chan interface{}) {
 }
 
 func main() {
-	sideDone := Sideways(func() interface{} {
+	sideDone := SideJob(func() interface{} {
 		defer log.Printf("side job done\n")
 		log.Printf("side job running\n")
 		time.Sleep(time.Second * 5)
