@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"reflect"
 )
 
 type Shape interface {
@@ -22,6 +24,8 @@ func process(shape interface{}) {
 		return
 	}
 
+	log.Printf("reflect is nil=%v\n", reflect.ValueOf(shape).IsNil())
+
 	switch shape.(type) {
 	case *Rectangle:
 		fmt.Println("Rectangle Area is:", shape.(*Rectangle).Area())
@@ -31,6 +35,11 @@ func process(shape interface{}) {
 }
 
 func main() {
-	var r *Rectangle
+	// will panic
+	r := new(Rectangle)
+	r = nil
 	process(r)
+
+	// will not panic
+	process(nil)
 }
