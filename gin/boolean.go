@@ -9,6 +9,7 @@ import (
 func main() {
 	router := gin.Default()
 	router.GET("/bind_bool", bindBool)
+	router.POST("/post_form", postForm)
 
 	router.Run("localhost:8080")
 }
@@ -25,4 +26,12 @@ func bindBool(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"is_ok": req.IsOK})
+}
+
+func postForm(c *gin.Context) {
+	testKey := "test"
+	c.JSON(http.StatusOK, gin.H{
+		"key": testKey,
+		"val": c.PostForm(testKey),
+	})
 }
