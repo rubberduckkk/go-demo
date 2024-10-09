@@ -19,7 +19,7 @@ func SideJob(work func() interface{}) (done <-chan interface{}) {
 	return workDone
 }
 
-func main() {
+func main2() {
 	sideDone := SideJob(func() interface{} {
 		defer log.Printf("side job done\n")
 		log.Printf("side job running\n")
