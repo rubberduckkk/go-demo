@@ -7,10 +7,8 @@ import (
 	"time"
 )
 
-func CreateDeferFunc(startTime time.Time, code *int) func() {
-	return func() {
-		log.Printf("code is %v, cost is %v\n", *code, time.Since(startTime))
-	}
+func CreateDeferFunc(startTime time.Time, code *int) {
+	log.Printf("code is %v, cost is %v\n", *code, time.Since(startTime))
 }
 
 type Response struct {
@@ -18,8 +16,10 @@ type Response struct {
 }
 
 func TestDefer(t *testing.T) {
+	log.Printf("processing request...\n")
 	r := new(Response)
-	defer CreateDeferFunc(time.Now(), &r.Code)()
+	defer CreateDeferFunc(time.Now(), &r.Code)
 	time.Sleep(time.Second * time.Duration(rand.Intn(5)))
 	r.Code = 200
+	log.Printf("finished processing...\n")
 }
