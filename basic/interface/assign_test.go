@@ -31,9 +31,21 @@ func ModifyDemo(d DemoInterface) {
 	}
 }
 
+func BatchModifyDemo(d DemoInterface) {
+	for _, content := range testContents {
+		if dd, ok := d.(*demoImpl); ok {
+			dd.content = content
+		}
+	}
+}
+
 func ShowDemo(d DemoInterface) {
 	d.ShowDemo()
 }
+
+var (
+	testContents = []string{"1", "2", "3"}
+)
 
 func TestAssign(t *testing.T) {
 	d := new(demoImpl)
@@ -43,4 +55,7 @@ func TestAssign(t *testing.T) {
 	ShowDemo(d) // still prints "original content"
 	ModifyDemo(d)
 	ShowDemo(d) // prints "new content"
+
+	BatchModifyDemo(d)
+	ShowDemo(d)
 }
