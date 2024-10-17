@@ -44,7 +44,7 @@ func ResponseInterceptor(c *gin.Context) {
 
 	c.Next()
 
-	log.Println("Response Code:", w.code)
+	log.Printf("Path: %v Code: %v", c.Request.URL.Path, w.code)
 
 	w.Reset()
 	responseWriterPool.Put(w)
