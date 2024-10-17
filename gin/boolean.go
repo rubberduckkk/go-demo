@@ -8,6 +8,7 @@ import (
 
 func main() {
 	router := gin.Default()
+	router.Use(ResponseInterceptor)
 	router.GET("/bind_bool", bindBool)
 	router.POST("/post_form", postForm)
 
@@ -25,7 +26,10 @@ func bindBool(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"is_ok": req.IsOK})
+	c.JSON(http.StatusOK, gin.H{
+		"is_ok": req.IsOK,
+		"code":  123,
+	})
 }
 
 func postForm(c *gin.Context) {
