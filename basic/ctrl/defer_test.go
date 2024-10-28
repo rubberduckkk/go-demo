@@ -5,6 +5,8 @@ import (
 	"math/rand"
 	"testing"
 	"time"
+
+	"github.com/sirupsen/logrus"
 )
 
 func CreateDeferFunc(startTime time.Time, code *int) {
@@ -22,4 +24,14 @@ func TestDefer(t *testing.T) {
 	time.Sleep(time.Second * time.Duration(rand.Intn(5)))
 	r.Code = 200
 	log.Printf("finished processing...\n")
+}
+
+func TestDeferLog(t *testing.T) {
+	now := time.Now()
+	logrus.Infof("defer log start")
+	defer logrus.WithField("wrong_cost", time.Since(now)).Infof("defer log end")
+	defer func() {
+		logrus.WithField("real_cost", time.Since(now)).Infof("defer log end")
+	}()
+	time.Sleep(time.Second * 5)
 }
