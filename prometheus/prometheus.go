@@ -12,17 +12,17 @@ import (
 func recordMetrics() {
 	go func() {
 		for {
-			opsProcessed.Inc()
+			opsProcessed.With(prometheus.Labels{"a": "1"}).Inc()
 			time.Sleep(2 * time.Second)
 		}
 	}()
 }
 
 var (
-	opsProcessed = promauto.NewCounter(prometheus.CounterOpts{
+	opsProcessed = promauto.NewCounterVec(prometheus.CounterOpts{
 		Name: "myapp_processed_ops_total",
 		Help: "The total number of processed events",
-	})
+	}, []string{"a", "b", "c"})
 )
 
 func main() {

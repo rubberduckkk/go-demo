@@ -8,7 +8,7 @@ import (
 
 func main() {
 	router := gin.Default()
-	router.Use(ResponseInterceptor)
+	router.Use(ResponseInterceptor, AnotherMiddleware)
 	router.GET("/bind_bool", bindBool)
 	router.POST("/post_form", postForm)
 
@@ -26,10 +26,7 @@ func bindBool(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"is_ok": req.IsOK,
-		"code":  123,
-	})
+	RspWithResponse(c, 123, "ok", nil)
 }
 
 func postForm(c *gin.Context) {
