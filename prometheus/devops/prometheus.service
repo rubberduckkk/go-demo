@@ -1,0 +1,14 @@
+[Unit]
+Description=Prometheus Server
+After=network-online.target
+Requires=network-online.target
+
+[Service]
+LimitCORE=infinity
+LimitNOFILE=1000000
+LimitNPROC=1000000
+ExecStart=/usr/local/prometheus/prometheus --web.enable-lifecycle --storage.tsdb.retention.time=5d --config.file=/usr/local/prometheus/prometheus.yml
+ExecReload=/bin/kill -SIGHUP $MAINPID
+Restart=always
+[Install]
+WantedBy=multi-user.target

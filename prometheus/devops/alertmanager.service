@@ -1,0 +1,14 @@
+[Unit]
+Description=AlertManager Server
+After=network-online.target
+Requires=network-online.target
+
+[Service]
+LimitCORE=infinity
+LimitNOFILE=1000000
+LimitNPROC=1000000
+ExecStart=/usr/local/alertmanager/alertmanager --config.file=/usr/local/alertmanager/alertmanager.yml
+ExecReload=/bin/kill -SIGHUP $MAINPID
+Restart=always
+[Install]
+WantedBy=multi-user.target
