@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"reflect"
 	"testing"
 )
 
@@ -45,4 +46,24 @@ func CheckDemo(d Demo) {
 func TestCheckDemo(t *testing.T) {
 	var d *demo1
 	CheckDemo(d)
+}
+
+func isNil(b Blaher) bool {
+	return b == nil
+}
+
+type Blaher interface {
+	Blah()
+}
+
+type blahImpl struct {
+}
+
+func (b *blahImpl) Blah() {
+	log.Printf("%v Blah()\n", reflect.TypeOf(b))
+}
+
+func TestNil(t *testing.T) {
+	var b *blahImpl
+	t.Logf("is nil=%v\n", isNil(b))
 }
