@@ -67,3 +67,13 @@ func TestNil(t *testing.T) {
 	var b *blahImpl
 	t.Logf("is nil=%v\n", isNil(b))
 }
+
+func returnNilError() interface{} {
+	return nil
+}
+
+func TestInterfaceAssertion(t *testing.T) {
+	result := returnNilError()
+	err, ok := result.(error)
+	t.Logf("err: %v, ok: %v\n", err, ok)
+}
