@@ -15,3 +15,17 @@ func TestNil(t *testing.T) {
 		fmt.Println(k, v)
 	}
 }
+
+func TestDeleteInFor(t *testing.T) {
+	m := make(map[int]int)
+	for i := 0; i < 100; i++ {
+		m[i] = 100 - i
+	}
+
+	for k := range m {
+		if k < 50 {
+			delete(m, k)
+		}
+	}
+	t.Logf("remain: %v", len(m))
+}
