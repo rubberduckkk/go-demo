@@ -29,3 +29,8 @@ func TestDeleteInFor(t *testing.T) {
 	}
 	t.Logf("remain: %v", len(m))
 }
+
+func Test2dMap(t *testing.T) {
+	m := make(map[string]map[string]int)
+	t.Logf("val: %v", m["a"]["b"])
+}
