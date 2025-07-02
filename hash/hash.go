@@ -33,3 +33,16 @@ func HashCode(src string, bucketCount uint32) int {
 	}
 	return int(hash % bucketCount)
 }
+
+type Node struct {
+	Addr   string
+	Weight int
+}
+
+type Hash interface {
+	Add(nodes ...*Node)
+	Rebuild(nodes []*Node)
+	Get(key string) (addr string, ok bool)
+	Remove(addr ...string)
+	Clear()
+}
