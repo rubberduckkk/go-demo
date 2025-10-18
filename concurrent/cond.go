@@ -39,7 +39,8 @@ func main() {
 	c.L.Lock()
 	sharedRsc["rsc1"] = "foo"
 	sharedRsc["rsc2"] = "bar"
-	c.Broadcast()
+	c.Broadcast() // send to all waiting goroutines
+	c.Signal()    // send to the longest waiting goroutine
 	c.L.Unlock()
 	wg.Wait()
 }
