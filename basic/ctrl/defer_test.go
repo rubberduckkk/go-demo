@@ -35,3 +35,12 @@ func TestDeferLog(t *testing.T) {
 	}()
 	time.Sleep(time.Second * 5)
 }
+
+func TestDeferWithParameters(t *testing.T) {
+	now := time.Now()
+	logrus.Infof("defer log start")
+	defer func(startTime time.Time) {
+		logrus.WithField("cost", time.Since(startTime)).Infof("defer log end")
+	}(now)
+	time.Sleep(time.Second * time.Duration(rand.Intn(5)))
+}
